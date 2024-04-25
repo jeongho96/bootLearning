@@ -3,7 +3,10 @@ package com.sparta.myselectshop.controller;
 
 
 import com.sparta.myselectshop.entity.User;
+import com.sparta.myselectshop.security.UserDetailsImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,10 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ProductController {
 
     @GetMapping("/products")
-    public String getProducts(HttpServletRequest req) {
-        System.out.println("ProductController.getProducts : 인증 완료");
-        User user = (User) req.getAttribute("user");
-        System.out.println("user.getUsername() = " + user.getUsername());
+    public String getProducts(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        User user = userDetails.getUser();
+        System.out.println(user.getUsername());
 
         return "redirect:/";
     }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 
 @Slf4j(topic = "LoggingFilter")
-@Component
+//@Component // 스프링 시큐리티 활용을 위한 주석
 @Order(1) // 필터의 순서 저장
 public class LoggingFilter implements Filter {
     @Override

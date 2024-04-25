@@ -15,7 +15,7 @@ import org.springframework.util.StringUtils;
 import java.io.IOException;
 
 @Slf4j(topic = "AuthFilter")
-@Component
+//@Component // 스프링 시큐리티 활용을 위한 주석
 @Order(2)
 public class AuthFilter implements Filter {
 
