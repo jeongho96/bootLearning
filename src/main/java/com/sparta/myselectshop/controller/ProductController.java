@@ -3,8 +3,11 @@ package com.sparta.myselectshop.controller;
 
 
 import com.sparta.myselectshop.entity.User;
+import com.sparta.myselectshop.entity.UserRoleEnum;
 import com.sparta.myselectshop.security.UserDetailsImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,17 @@ public class ProductController {
     public String getProducts(@AuthenticationPrincipal UserDetailsImpl userDetails) {
         User user = userDetails.getUser();
         System.out.println(user.getUsername());
+
+        return "redirect:/";
+    }
+
+    @Secured(UserRoleEnum.Authority.ADMIN) // 관리자용
+    @GetMapping("/products/secured")
+    public String getProductsByAdmin(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        System.out.println("userDetails.getUsername() = " + userDetails.getUsername());
+        for (GrantedAuthority authority : userDetails.getAuthorities()) {
+            System.out.println("authority.getAuthority() = " + authority.getAuthority());
+        }
 
         return "redirect:/";
     }
