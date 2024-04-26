@@ -20,5 +20,6 @@ public class Food {
     private double price;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 }
