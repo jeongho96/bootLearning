@@ -20,7 +20,7 @@ public class User {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}) // 저장, 삭제시 영속성에 영향
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true) // 저장, 삭제시 영속성에 영향
     private List<Food> foodList = new ArrayList<>();
 
     public void addFoodList(Food food) {
