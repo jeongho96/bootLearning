@@ -53,6 +53,9 @@ public class ProductService {
 
     }
 
+    // One To Many의 경우 Default는 지연 로딩. 지연 로딩을 쓰기 위해서는 transaction 환경이 필요함.
+    // 성능을 높이기 위해 readonly 옵션 추가.
+    @Transactional(readOnly = true)
     public Page<ProductResponseDto> getProducts(User user, int page, int size, String sortBy, boolean isAsc) {
         Sort.Direction direction = isAsc ? Sort.Direction.ASC : Sort.Direction.DESC;
         Sort sort = Sort.by(direction, sortBy);
