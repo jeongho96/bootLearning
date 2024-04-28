@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static com.sparta.myselectshop.service.ProductService.MIN_MY_PRICE;
 
@@ -35,6 +36,13 @@ public class TestDataRunner implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) {
+        // Check if test user already exists
+        Optional<User> existingUser = userRepository.findByUsername("Robbie");
+        if (existingUser.isPresent()) {
+            // Test user already exists, so we don't need to create test data again
+            return;
+        }
+
         // 테스트 User 생성
         User testUser = new User("Robbie", passwordEncoder.encode("1234"), "robbie@sparta.com", UserRoleEnum.USER);
         testUser = userRepository.save(testUser);

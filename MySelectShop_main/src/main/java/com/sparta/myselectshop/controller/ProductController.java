@@ -53,7 +53,7 @@ public class ProductController {
         productService.addFolder(productId, folderId, userDetails.getUser());
     }
 
-    @GetMapping("/folders/{folder{id}/products")
+    @GetMapping("/folders/{folderId}/products")
     public Page<ProductResponseDto> getProductsInFolder(
             @PathVariable Long folderId,
             @RequestParam("page") int page,
